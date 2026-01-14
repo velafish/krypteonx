@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Krypteonx Core
+Comment=Krypteonx P2P Cryptocurrency
+Comment[de]=Verbinde mit dem Krypteonx peer-to-peer Netzwerk
+Comment[fr]=Krypteonx, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Krypteonx, eşten eşe kriptografik sanal para birimi
+Exec=krypteonx-qt %u
+Terminal=false
+Type=Application
+Icon=krypteonx128
+MimeType=x-scheme-handler/krypteonx;
+Categories=Office;Finance;

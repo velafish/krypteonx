@@ -1,0 +1,6 @@
+usr/local/bin/krypteonx-qt usr/bin
+share/pixmaps/krypteonx32.xpm usr/share/pixmaps
+share/pixmaps/krypteonx16.xpm usr/share/pixmaps
+share/pixmaps/krypteonx128.png usr/share/pixmaps
+debian/krypteonx-qt.desktop usr/share/applications
+debian/krypteonx-qt.protocol usr/share/kde4/services/
