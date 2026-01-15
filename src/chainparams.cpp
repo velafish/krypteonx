@@ -156,6 +156,8 @@ static void VerifyGenesisPOW(const CBlock& genesis)
     CBlock block(genesis);
     do {
         uint256 hash = block.GetPOWHash();
+        uint256 mroot= block.hashMerkleRoot;
+        //std::cerr << "hashMerkleRoot: 0x" << mroot.ToString() << std::endl;
         if (UintToArith256(hash) <= bnTarget) {
             if (genesis.nNonce != block.nNonce) {
                 std::cerr << "VerifyGenesisPOW:  provided nNonce (" << genesis.nNonce << ") invalid" << std::endl;
@@ -544,11 +546,11 @@ public:
         nDefaultPort = 48999;
         nPruneAfterHeight = 100000;
         
-        genesis = CreateGenesisBlock(1715727745, 2744, 0x20001fff, 4, 1 * COIN);
+        genesis = CreateGenesisBlock(1715727745, 4165, 0x20001fff, 4, 1 * COIN);
         VerifyGenesisPOW(genesis);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x2e3f75b45a25238f94d44655a44f5259c3ba4d4d031ec2f7485cafdd338092c8"));
-        assert(genesis.hashMerkleRoot == uint256S("0x14cb17bc7b9d969d93c3a50a225166818638cede0727bc776cffd79746adc01f"));
+        assert(consensus.hashGenesisBlock == uint256S("0xc1595002266b802c672ceab2ab475fff73ee7b2199cc74a7d742bccad2280f0e"));
+        assert(genesis.hashMerkleRoot == uint256S("0x15b65e7f2e7ccdac13445f1950557476a8521119aa8b94bca34bcd142d9b1297"));
 
         // Krypteonx addresses start with 'F'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 45);
@@ -567,19 +569,8 @@ public:
         //        	std::cout << "mainnet is disable" << endl;
         //        	exit(0);
         //        }
-        std::vector<FounderRewardStructure> rewardStructures = {{INT_MAX, 5}}; // 8% founder/dev fee forever
+        std::vector<FounderRewardStructure> rewardStructures = {{INT_MAX, 0}}; // 8% founder/dev fee forever
         consensus.nFounderPayment = FounderPayment(rewardStructures, 250);
-        consensus.nCollaterals = SmartnodeCollaterals(
-            {{88720, 6000 * COIN},
-                {132720, 8000 * COIN},
-                {176720, 10000 * COIN},
-                {220720, 12500 * COIN},
-                {264720, 15000 * COIN},
-                {308720, 18000 * COIN},
-                {352720, 50000 * COIN},
-                {396720, 75000 * COIN},
-                {INT_MAX,100000 * COIN}},
-            {{5761, 0}, {INT_MAX, 65}});
         // FutureRewardShare defaultShare(0.8,0.2,0.0);
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8, 0.2, 0.0);
 
@@ -608,7 +599,7 @@ public:
         nPoolNewMaxParticipants = 20;
         nFulfilledRequestExpireTime = 60 * 60; // fulfilled requests expire in 1 hour
 
-        vSporkAddresses = {"F9pXKSVDcUGvs6Q7L4xBUrv9k5BrhzoFaH"};
+        vSporkAddresses = {"KGu7x26gHCw4YSLsDbk3XFq57pyXk4jfhN"};
         nMinSporkKeys = 1;
         fBIP9CheckSmartnodesUpgraded = true;
 
@@ -693,21 +684,18 @@ public:
         pchMessageStart[3] = 0x2e; // .
         nDefaultPort = 11551;
         nPruneAfterHeight = 1000;
-        genesis = CreateGenesisBlock(1715727745, 2744, 0x20001fff, 4, 50 * COIN);
+        genesis = CreateGenesisBlock(1715727745, 4165, 0x20001fff, 4, 1 * COIN);
         VerifyGenesisPOW(genesis);
 
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x2e3f75b45a25238f94d44655a44f5259c3ba4d4d031ec2f7485cafdd338092c8"));
-        assert(genesis.hashMerkleRoot == uint256S("0x14cb17bc7b9d969d93c3a50a225166818638cede0727bc776cffd79746adc01f"));
+        assert(consensus.hashGenesisBlock == uint256S("0xc1595002266b802c672ceab2ab475fff73ee7b2199cc74a7d742bccad2280f0e"));
+        assert(genesis.hashMerkleRoot == uint256S("0x15b65e7f2e7ccdac13445f1950557476a8521119aa8b94bca34bcd142d9b1297"));
 
         vFixedSeeds.clear();
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("89.168.20.232");
-        vSeeds.emplace_back("89.168.18.209");
-        vSeeds.emplace_back("krypteonx.online");
 
         // Testnet Krypteonx addresses start with 'f'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 95);
@@ -758,7 +746,7 @@ public:
         nPoolNewMaxParticipants = 20;
         nFulfilledRequestExpireTime = 5 * 60; // fulfilled requests expire in 5 minutes
 
-        vSporkAddresses = {"rsqc2caFRG6myRdzKipP4PpVW9LnFaG7CH"};
+        vSporkAddresses = {"KGu7x26gHCw4YSLsDbk3XFq57pyXk4jfhN"};
         nMinSporkKeys = 1;
         fBIP9CheckSmartnodesUpgraded = true;
 
@@ -844,17 +832,17 @@ public:
         nDefaultPort = 11550;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1715727745, 2744, 0x20001fff, 4, 50 * COIN);
+        genesis = CreateGenesisBlock(1715727745, 4165, 0x20001fff, 4, 1 * COIN);
         VerifyGenesisPOW(genesis);
         consensus.hashGenesisBlock = genesis.GetHash();
         //      std::cout << "hash: " << consensus.hashGenesisBlock.ToString() << std::endl;
-        assert(consensus.hashGenesisBlock == uint256S("0x2e3f75b45a25238f94d44655a44f5259c3ba4d4d031ec2f7485cafdd338092c8"));
-        assert(genesis.hashMerkleRoot == uint256S("0x14cb17bc7b9d969d93c3a50a225166818638cede0727bc776cffd79746adc01f"));
+        assert(consensus.hashGenesisBlock == uint256S("0xc1595002266b802c672ceab2ab475fff73ee7b2199cc74a7d742bccad2280f0e"));
+        assert(genesis.hashMerkleRoot == uint256S("0x15b65e7f2e7ccdac13445f1950557476a8521119aa8b94bca34bcd142d9b1297"));
 
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8, 0.2, 0.0);
 
-        std::vector<FounderRewardStructure> rewardStructures = {{INT_MAX, 5}}; // 5% founder/dev fee forever
-        consensus.nFounderPayment = FounderPayment(rewardStructures, 200, "yaackz5YDLnFuuX6gGzEs9EMRQGfqmNYjc");
+        std::vector<FounderRewardStructure> rewardStructures = {{INT_MAX, 0}}; // 5% founder/dev fee forever
+        consensus.nFounderPayment = FounderPayment(rewardStructures, 200, "KGu7x26gHCw4YSLsDbk3XFq57pyXk4jfhN");
 
 
         vFixedSeeds.clear();
@@ -900,14 +888,13 @@ public:
         nFulfilledRequestExpireTime = 5 * 60; // fulfilled requests expire in 5 minutes
 
         // privKey: cVpnZj4dZvRXmBf7Jze1GjpLQb25iKP92GDXUsKdUJTXhXRo2RFA
-        vSporkAddresses = {"yaackz5YDLnFuuX6gGzEs9EMRQGfqmNYjc"};
+        vSporkAddresses = {"KGu7x26gHCw4YSLsDbk3XFq57pyXk4jfhN"};
         nMinSporkKeys = 1;
         // devnets are started with no blocks and no MN, so we can't check for upgraded MN (as there are none)
         fBIP9CheckSmartnodesUpgraded = false;
 
         checkpointData = (CCheckpointData){
             {
-                {0, uint256S("0x99f1aeb781d780f51aee4247b23eb91d561f6fb8c9e761a9f1ebc72212b4ebf0")},
             }};
 
         chainTxData = ChainTxData{
@@ -989,11 +976,11 @@ public:
         nDefaultPort = 11554;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1614369600, 2, 0x207fffff, 4, 50 * COIN);
+        genesis = CreateGenesisBlock(1715727745, 4165, 0x207fffff, 4, 1 * COIN);
         VerifyGenesisPOW(genesis);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x485491468e03c8ac23dd38f70fc1cda9f98cbd0bf58945e2da6c94c2a2d8b044"));
-        assert(genesis.hashMerkleRoot == uint256S("0x87a48bc22468acdd72ee540aab7c086a5bbcddc12b51c6ac925717a74c269453"));
+        assert(consensus.hashGenesisBlock == uint256S("0xc1595002266b802c672ceab2ab475fff73ee7b2199cc74a7d742bccad2280f0e"));
+        assert(genesis.hashMerkleRoot == uint256S("0x15b65e7f2e7ccdac13445f1950557476a8521119aa8b94bca34bcd142d9b1297"));
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8, 0.2, 0.0);
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
@@ -1014,16 +1001,15 @@ public:
         nPoolNewMaxParticipants = 20;
 
         // privKey: cVpnZj4dZvRXmBf7Jze1GjpLQb25iKP92GDXUsKdUJTXhXRo2RFA
-        vSporkAddresses = {"yaackz5YDLnFuuX6gGzEs9EMRQGfqmNYjc"};
+        vSporkAddresses = {"KGu7x26gHCw4YSLsDbk3XFq57pyXk4jfhN"};
         nMinSporkKeys = 1;
         // regtest usually has no smartnodes in most tests, so don't check for upgraged MNs
         fBIP9CheckSmartnodesUpgraded = false;
         std::vector<FounderRewardStructure> rewardStructures = {{INT_MAX, 5}}; // 5% founder/dev fee forever
-        consensus.nFounderPayment = FounderPayment(rewardStructures, 500, "yaackz5YDLnFuuX6gGzEs9EMRQGfqmNYjc");
+        //consensus.nFounderPayment = FounderPayment(rewardStructures, 500, "yaackz5YDLnFuuX6gGzEs9EMRQGfqmNYjc");
 
         checkpointData = {
             {
-                {0, uint256S("b79e5df07278b9567ada8fc655ffbfa9d3f586dc38da3dd93053686f41caeea0")},
             }};
 
         chainTxData = ChainTxData{
