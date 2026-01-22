@@ -160,3 +160,4 @@ build_win64.sh
 win64QT_compile.sh
 mainnet.hex
 mainnet.pem
+/.vs
