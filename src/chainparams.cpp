@@ -539,10 +539,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-pchMessageStart[0] = 0x4b; // K
-pchMessageStart[1] = 0x52; // R
-pchMessageStart[2] = 0x59; // Y
-pchMessageStart[3] = 0x58; // X
+pchMessageStart[0] = 0x6b;
+pchMessageStart[1] = 0x72;
+pchMessageStart[2] = 0x79;
+pchMessageStart[3] = 0x78;
         nDefaultPort = 48999;
         nPruneAfterHeight = 100000;
         
@@ -678,11 +678,11 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x0"); // 0
 
-        pchMessageStart[0] = 0x66; // f
-        pchMessageStart[1] = 0x62; // b
-        pchMessageStart[2] = 0x63; // c
-        pchMessageStart[3] = 0x2e; // .
-        nDefaultPort = 11551;
+pchMessageStart[0] = 0xd4; // K
+pchMessageStart[1] = 0xa9; // R
+pchMessageStart[2] = 0x8e; // Y
+pchMessageStart[3] = 0x51; // X.
+        nDefaultPort = 10551;
         nPruneAfterHeight = 1000;
         genesis = CreateGenesisBlock(1715727745, 4165, 0x20001fff, 4, 1 * COIN);
         VerifyGenesisPOW(genesis);
@@ -698,7 +698,7 @@ public:
         // nodes with support for servicebits filtering should be at the top
 
         // Testnet Krypteonx addresses start with 'f'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 95);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 45);
         // Testnet Krypteonx script addresses start with '8' or '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
         // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
@@ -825,11 +825,11 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x000000000000000000000000000000000000000000000000000000000000000");
 
-        pchMessageStart[0] = 0xe2;
-        pchMessageStart[1] = 0xca;
-        pchMessageStart[2] = 0xff;
-        pchMessageStart[3] = 0xce;
-        nDefaultPort = 11550;
+pchMessageStart[0] = 0xc7; // K
+pchMessageStart[1] = 0x3b; // R
+pchMessageStart[2] = 0x91; // Y
+pchMessageStart[3] = 0x2f; // X.
+        nDefaultPort = 14550;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1715727745, 4165, 0x20001fff, 4, 1 * COIN);
@@ -850,7 +850,7 @@ public:
         // vSeeds.push_back(CDNSSeedData("krypteonx.net",  "devnet-seed.krypteonx.net"));
 
         // Testnet Krypteonx addresses start with 'e'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 92);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 45);
         // Testnet Krypteonx script addresses start with '8' or '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
         // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
@@ -969,11 +969,11 @@ public:
             {{INT_MAX, 10 * COIN}},
             {{240, 0}, {INT_MAX, 20}});
 
-        pchMessageStart[0] = 0xfc;
-        pchMessageStart[1] = 0xc1;
-        pchMessageStart[2] = 0xb7;
-        pchMessageStart[3] = 0xdc;
-        nDefaultPort = 11554;
+pchMessageStart[0] = 0xc7;
+pchMessageStart[1] = 0x3b;
+pchMessageStart[2] = 0x91;
+pchMessageStart[3] = 0x30;
+        nDefaultPort = 14554;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1715727745, 4165, 0x207fffff, 4, 1 * COIN);
